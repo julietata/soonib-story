@@ -17,9 +17,11 @@
                 <div class="rounded bg-support shadow px-4 py-3">
                     <div class="rounded-md bg-gray-100 px-6 py-4">
                         <p class="fw-semibold fs-2">Message</p>
-                        <textarea name="message" id="message" cols="65" rows="3" class="border rounded px-2 py-2 w-100" placeholder="What are you thinking about?"></textarea>
+                        <textarea name="message" id="message" cols="65" rows="3" class="border rounded px-2 py-2 w-100 mb-2" placeholder="What are you thinking about?"></textarea>
+                        <input type="checkbox" name="anonymous" id="anonymous">
+                        <label for="anonymous">Anonymous</label>
                         <div class="d-flex justify-content-end mt-2">
-                            <button class="bg-danger py-2 px-4 rounded border-0 mt-2 fs-5 fw-semibold me-2" id="cancel">Cancel</button>
+                            <a href="/" class="bg-danger py-2 px-4 rounded border-0 mt-2 fs-5 fw-semibold me-2 text-decoration-none text-black" id="cancel">Cancel</a>
                             <button class="bg-secondary py-2 px-4 rounded border-0 mt-2 fs-5 fw-semibold" id="add">Post</button>
                         </div>
                     </div>

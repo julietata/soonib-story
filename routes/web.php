@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,24 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\MessageController::class, 'index']);
-Route::get('/register', [\App\Http\Controllers\UserController::class, 'register_index']);
-Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
-Route::get('/login', [\App\Http\Controllers\UserController::class, 'login_index']);
-Route::post('/login', [\App\Http\Controllers\UserController::class, 'login']);
-Route::get('/logout', [\App\Http\Controllers\UserController::class, 'logout']);
+Route::get('/', [MessageController::class, 'index']);
 
-//Route::group(['middleware'=>'check'], function (){
-    Route::post('/fav/{id}', [\App\Http\Controllers\MessageController::class, 'fav_message']);
-    Route::post('/dislike/{id}', [\App\Http\Controllers\MessageController::class, 'dislike_message']);
-    Route::get('/createMessage', [\App\Http\Controllers\MessageController::class, 'create_index']);
-    Route::post('/createMessage', [\App\Http\Controllers\MessageController::class, 'new_message']);
-    Route::get('/updateMessage/{id}', [\App\Http\Controllers\MessageController::class, 'update_message']);
-    Route::post('updateMessage/{id}', [\App\Http\Controllers\MessageController::class, 'update']);
-    Route::post('/delete/{id}', [\App\Http\Controllers\MessageController::class, 'delete_message']);
-    Route::get('/profile', function () {return view('profile');});
-//});
+Route::middleware(['guest'])->group(function() {
+    Route::get('/register', [UserController::class, 'register_index']);
+    Route::post('/register', [UserController::class, 'register']);
+    Route::get('/login', [UserController::class, 'login_index']);
+    Route::post('/login', [UserController::class, 'login']);
+});
 
-//Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['user'])->group(function() {
+    Route::get('/logout', [UserController::class, 'logout']);
+    Route::post('/fav/{id}', [MessageController::class, 'fav_message']);
+    Route::post('/dislike/{id}', [MessageController::class, 'dislike_message']);
+    Route::get('/createMessage', [MessageController::class, 'create_index']);
+    Route::post('/createMessage', [MessageController::class, 'new_message']);
+    Route::get('/updateMessage/{id}', [MessageController::class, 'update_message']);
+    Route::post('updateMessage/{id}', [MessageController::class, 'update']);
+    Route::post('/delete/{id}', [MessageController::class, 'delete_message']);
+    Route::get('/profile', [MessageController::class, 'my_message']);
+});

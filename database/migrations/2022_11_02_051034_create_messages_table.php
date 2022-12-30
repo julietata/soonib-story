@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->text('content');
             $table->date('timestamp');
+            $table->boolean('anonymous');
         });
     }
 

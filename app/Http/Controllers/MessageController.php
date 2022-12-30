@@ -31,12 +31,14 @@ class MessageController extends Controller
     public function new_message(Request $request){
         $user = Auth::user()->id;
         $content = $request->message;
+        $anonymous = $request->anonymous ? true : false;
         $timestamp = Carbon::now();
 
         $create = new Message;
         $create->user_id = $user;
         $create->content = $content;
         $create->timestamp = $timestamp;
+        $create->anonymous = $anonymous;
         $create->save();
         return redirect('/');
     }
@@ -83,5 +85,11 @@ class MessageController extends Controller
 
         return redirect('/');
     }
-    //
+    
+    public function my_message() {
+        $user = Auth::user()->id;
+        $messages = Message::where("user_id", $user)->get();
+
+        return view('profile', compact('messages'));
+    }
 }

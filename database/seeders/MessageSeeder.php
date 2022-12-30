@@ -19,7 +19,8 @@ class MessageSeeder extends Seeder
             [
                 'user_id' => 1,
                 'content' => 'hehehe gatau mo tulis apa tapi yaudahlah yaa',
-                'timestamp' => Carbon::now()
+                'timestamp' => Carbon::now(),
+                'anonymous' => true
             ]
         );
 
@@ -27,7 +28,8 @@ class MessageSeeder extends Seeder
             [
                 'user_id' => 1,
                 'content' => 'halo nama saya tata yang baik hati dan tidak sombong',
-                'timestamp' => Carbon::now()
+                'timestamp' => Carbon::now(),
+                'anonymous' => false
             ]
         );
 
@@ -35,7 +37,8 @@ class MessageSeeder extends Seeder
             [
                 'user_id' => 2,
                 'content' => 'hehehe gatau mo tulis apa tapi yaudahlah yaa',
-                'timestamp' => Carbon::now()
+                'timestamp' => Carbon::now(),
+                'anonymous' => true
             ]
         );
 
@@ -43,7 +46,8 @@ class MessageSeeder extends Seeder
             [
                 'user_id' => 2,
                 'content' => 'halo nama saya sela yang baik hati dan tidak sombong',
-                'timestamp' => Carbon::now()
+                'timestamp' => Carbon::now(),
+                'anonymous' => false
             ]
         );
     }

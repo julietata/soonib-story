@@ -15,7 +15,9 @@
         <div class="w-100 py-2">
             <div class="justify-content-between px-3">
                 <div class="d-flex align-items-center mb-3">
-                    <img src="{{asset('storage/assets/Soonib Story.png')}}" width="100" class="me-3">
+                    <a href="/">
+                        <img src="{{asset('storage/assets/Soonib Story.png')}}" width="100" class="me-3">
+                    </a>
                     <div class="d-flex fs-5 fw-semibold">
                         Hello, @if(auth()->check()) {{auth()->user()->name}} @else Guest @endif
                     </div>
@@ -28,7 +30,7 @@
                             </svg>
                             <p class="m-0 text-primary fs-5 fw-semibold">Create Message</p>
                         </a>
-                        <a href="" class="mx-2 d-flex align-items-center my-3 text-decoration-none">
+                        <a href="/profile" class="mx-2 d-flex align-items-center my-3 text-decoration-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-person-fill me-3" viewBox="0 0 16 16">
                                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                             </svg>
