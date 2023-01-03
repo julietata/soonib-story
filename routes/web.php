@@ -24,7 +24,19 @@ Route::middleware(['guest'])->group(function() {
     Route::post('/login', [UserController::class, 'login']);
 });
 
-Route::middleware(['user'])->group(function() {
+// Route::middleware(['user'])->group(function() {
+//     Route::get('/logout', [UserController::class, 'logout']);
+//     Route::post('/fav/{id}', [MessageController::class, 'fav_message']);
+//     Route::post('/dislike/{id}', [MessageController::class, 'dislike_message']);
+//     Route::get('/createMessage', [MessageController::class, 'create_index']);
+//     Route::post('/createMessage', [MessageController::class, 'new_message']);
+//     Route::get('/updateMessage/{id}', [MessageController::class, 'update_message']);
+//     Route::post('updateMessage/{id}', [MessageController::class, 'update']);
+//     Route::post('/delete/{id}', [MessageController::class, 'delete_message']);
+//     Route::get('/profile', [MessageController::class, 'my_message']);
+// });
+
+//Route::middleware(['user'])->group(function() {
     Route::get('/logout', [UserController::class, 'logout']);
     Route::post('/fav/{id}', [MessageController::class, 'fav_message']);
     Route::post('/dislike/{id}', [MessageController::class, 'dislike_message']);
@@ -34,4 +46,4 @@ Route::middleware(['user'])->group(function() {
     Route::post('updateMessage/{id}', [MessageController::class, 'update']);
     Route::post('/delete/{id}', [MessageController::class, 'delete_message']);
     Route::get('/profile', [MessageController::class, 'my_message']);
-});
+//});
