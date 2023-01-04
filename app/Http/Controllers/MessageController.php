@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Dislike;
 use App\Models\Favorite;
 use App\Models\Message;
+use App\Models\Notification;
+use App\Models\NotificationDetail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -66,10 +68,27 @@ class MessageController extends Controller
         $user = Auth::user()->id;
         $message = $id;
 
+        // $exist = Favorite::where('user_id', $user)->where('message_id',$id)->get();
+
+        // if($exist){
+        //     return redirect('/');
+        // }
+
         $fav = new Favorite;
         $fav->user_id = $user;
         $fav->message_id = $message;
         $fav->save();
+
+        $getMessage = Message::find($id);
+
+        $notification = Notification::where('user_id',$getMessage->user_id)->first();
+
+        NotificationDetail::create([
+            'notification_id'=>$notification->id,
+            'user_id'=>$user,
+            'message_id'=>$message,
+            'content'=>'favorite'
+        ]);
 
         return redirect('/');
     }
@@ -78,14 +97,32 @@ class MessageController extends Controller
         $user = Auth::user()->id;
         $message = $id;
 
+        $exist = Dislike::all()->where('user_id', $user)->where('message_id',$id)->first();
+
+        if($exist){
+            $exist->delete();
+            return redirect('/');
+        }
+
         $dislike = new Dislike;
         $dislike->user_id = $user;
         $dislike->message_id = $message;
         $dislike->save();
 
+        $getMessage = Message::find($id);
+
+        $notification = Notification::where('user_id',$getMessage->user_id)->first();
+
+        NotificationDetail::create([
+            'notification_id'=>$notification->id,
+            'user_id'=>$user,
+            'message_id'=>$message,
+            'content'=>'dislike'
+        ]);
+
         return redirect('/');
     }
-    
+
     public function my_message() {
         $user = Auth::user()->id;
         $messages = Message::where("user_id", $user)->get();
