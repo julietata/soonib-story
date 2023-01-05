@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MessageController::class, 'index']);
+Route::get('/admin', [MessageController::class, 'admin']);
 
 Route::middleware(['guest'])->group(function() {
     Route::get('/register', [UserController::class, 'register_index']);

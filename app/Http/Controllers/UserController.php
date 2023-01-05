@@ -37,7 +37,12 @@ class UserController extends Controller
         $password = $request->password;
 
         if (auth()->attempt(['name' => $username, 'password' => $password])){
-            return redirect('/');
+            if (\Illuminate\Support\Facades\Auth::user()->name == "Admin"){
+                return redirect('/admin');
+            }
+            else{
+                return redirect('/');
+            }
         } else {
             return redirect()->back();
         }
