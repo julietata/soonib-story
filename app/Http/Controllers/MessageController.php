@@ -11,6 +11,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class MessageController extends Controller
 {
@@ -35,6 +36,15 @@ class MessageController extends Controller
         $content = $request->message;
         $anonymous = $request->anonymous ? true : false;
         $timestamp = Carbon::now();
+
+        //kata-kata kasar
+        $badWords = ['kontol','fuck','kimak','memek','ass','asshole', 'bitch','shit'];
+        $contentToCheck = strtolower($content);
+//        $badWordCheck = str_contains($contentToCheck,$badWords);
+        $badWordCheck = str::contains($contentToCheck,$badWords);
+        if($badWordCheck){
+            return redirect()->back()->withErrors(['badWord'=>'Bad Word Detected!'])->withInput();
+        }
 
         $create = new Message;
         $create->user_id = $user;

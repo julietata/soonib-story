@@ -18,6 +18,11 @@ use App\Http\Controllers\NotificationController;
 
 Route::get('/', [MessageController::class, 'index']);
 
+//admin
+Route::get('/createNotification', [NotificationController::class, 'createNotificationView']);
+Route::post('/createNotification', [NotificationController::class, 'createNotification']);
+
+
 Route::middleware(['guest'])->group(function() {
     Route::get('/register', [UserController::class, 'register_index']);
     Route::post('/register', [UserController::class, 'register']);
