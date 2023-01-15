@@ -37,7 +37,7 @@ class UserController extends Controller
         $password = $request->password;
 
         if (auth()->attempt(['name' => $username, 'password' => $password])){
-            if (\Illuminate\Support\Facades\Auth::user()->name == "Admin"){
+            if (\Illuminate\Support\Facades\Auth::user()->role == "Admin"){
                 return redirect('/admin');
             }
             else{
