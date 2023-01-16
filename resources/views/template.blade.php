@@ -48,6 +48,13 @@
                             </svg>
                             <p class="m-0 text-primary fs-5 fw-semibold">Settings</p>
                         </a>
+                        <a href="/trending" class="mx-2 d-flex align-items-center my-3 text-decoration-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-award-fill me-3" viewBox="0 0 16 16">
+                                <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"/>
+                                <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                              </svg>
+                              <p class="m-0 text-primary fs-5 fw-semibold">Trending</p>
+                        </a>
 {{--                        <a href="/logout" class="position-relative bottom-0 mb-4 bg-primary text-white text-decoration-none py-2 px-3 fw-bold rounded mx-2">--}}
 {{--                            Sign out--}}
 {{--                        </a>--}}

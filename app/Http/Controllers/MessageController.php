@@ -81,6 +81,11 @@ class MessageController extends Controller
         return redirect('/');
     }
 
+    public function trending_message(){
+        $count = Favorite::select('message_id', \DB::raw("count(message_id) as count"))->groupBy('message_id')->orderBy('count', 'desc')->get();
+        return view('trending',compact('count'));
+    }
+
     public function dislike_message($id){
         $user = Auth::user()->id;
         $message = $id;

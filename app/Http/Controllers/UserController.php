@@ -71,7 +71,7 @@ public function login(Request $request) {
     $username = $request->get('name');
     $password = $request->get('password');
 
-    if (auth()->attempt(['name' => $username, 'password' => $password])) {
+    if (auth()->attempt(['name'=>$username, 'password'=>$password])) {
         if ($request->remember != null) {
             Cookie::queue(Cookie::make('remember', $username, 2628000));
         }
