@@ -54,19 +54,51 @@
                                 <form action="/fav/{{$data[$i]->id}}" method="post">
                                     {{csrf_field()}}
                                     <button class="w-100 bg-white border-top border-end border-0 py-2">
+                                    @php
+                                        $check = 0;
+                                    @endphp
+                                    @for($j = 0; $j < count($favorites); $j++)
+                                    @if($data[$i]->id == $favorites[$j]->message_id)
+                                    @php
+                                        $check = 1;
+                                    @endphp
+                                    @endif
+                                    @endfor
+                                    @if($check == 1)
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="yellow" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                        </svg>
+                                    @else
                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
                                             <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
                                         </svg>
+                                    @endif
                                     </button>
                                 </form>
                             </div>
                             <div class="w-100">
-                                <form action="/dislike/{{$data[$i]->id}}" method="post">
+                                <form action="/dislike/{{$data[$i]->id}}" method="post"> 
                                     {{csrf_field()}}
-                                    <button class="w-100 bg-white border-top border-start border-0 py-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                                        </svg>
+                                    <button class="w-100 bg-white border-top border-end border-0 py-2">
+                                    @php
+                                        $check = 0;
+                                    @endphp
+                                    @for($j = 0; $j < count($like); $j++)
+                                    @if($data[$i]->id == $like[$j]->message_id)
+                                    @php
+                                        $check = 1;
+                                    @endphp
+                                    @endif
+                                    @endfor
+                                    @if($check == 1)
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="red" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                      </svg>
+                                    @else
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="grey" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                      </svg>
+                                    @endif
                                     </button>
                                 </form>
                             </div>
@@ -76,35 +108,7 @@
             </div>
         @endfor
     </div>
-{{--    <nav class="border-t border-gray-200 px-4 flex items-center justify-between sm:px-0 max-w-prose mx-auto">--}}
-{{--        <div class="-mt-px w-0 flex-1 flex">--}}
-{{--            <a href="{{$data->previousPageUrl()}}" class="border-t-2 border-transparent pt-4 pr-1 inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">--}}
-{{--                <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">--}}
-{{--                    <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />--}}
-{{--                </svg>--}}
-{{--                Previous--}}
-{{--            </a>--}}
-{{--        </div>--}}
-{{--        <div class="hidden md:-mt-px md:flex">--}}
-{{--            @for($i = 1; $i <= $data->lastPage(); $i++)--}}
-{{--                @if($i == $data->currentPage())--}}
-{{--                    <a href="#" class="border-indigo-500 text-indigo-600 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium" aria-current="page">--}}
-{{--                        {{$i}}--}}
-{{--                    </a>--}}
-{{--                @else--}}
-{{--                    <a href="{{$data->url($i)}}" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium">--}}
-{{--                        {{$i}}--}}
-{{--                    </a>--}}
-{{--                @endif--}}
-{{--            @endfor--}}
-{{--        </div>--}}
-{{--        <div class="-mt-px w-0 flex-1 flex justify-end">--}}
-{{--            <a href="{{$data->nextPageUrl()}}" class="border-t-2 border-transparent pt-4 pl-1 inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">--}}
-{{--                Next--}}
-{{--                <svg class="ml-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">--}}
-{{--                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />--}}
-{{--                </svg>--}}
-{{--            </a>--}}
-{{--        </div>--}}
-{{--    </nav>--}}
+    <div class="d-flex justify-content-center align-items-center my-5 pt-5" style="list-style-type:none;">
+        {{$data->links("pagination::bootstrap-4")}}
+    </div>
 @endsection

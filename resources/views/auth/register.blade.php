@@ -23,6 +23,9 @@
                 <div class="d-flex align-items-center mb-3">
                     <label for="name" class="text-white me-3 w-25">Username</label>
                     <input type="text" name="name" id="name" placeholder="Username" class="w-100 p-2" required>
+                    @if($errors->has('name'))
+                        <div class="text-danger fs-6 fw-light mb-3">{{$errors->first('name')}}</div>
+                    @endif
                 </div>
                 <div class="d-flex align-items-center mb-3">
                     <label class="text-white me-3 w-25">Gender</label>
@@ -30,14 +33,23 @@
                     <label for="male" class="text-white mx-3">Male</label>
                     <input type="radio" name="gender" id="female" value="female" class="ml-4" required>
                     <label for="male" class="text-white mx-3">Female</label>
+                    @if($errors->has('gender'))
+                        <div class="text-danger fs-6 fw-light mb-3">{{$errors->first('gender')}}</div>
+                    @endif
                 </div>
                 <div class="d-flex align-items-center mb-3">
                     <label for="email" class="text-white me-3 w-25">Email</label>
                     <input type="email" name="email" id="email" placeholder="Email" class="w-100 p-2" required>
+                    @if($errors->has('email'))
+                        <div class="text-danger fs-6 fw-light mb-3">{{$errors->first('email')}}</div>
+                    @endif
                 </div>
                 <div class="d-flex align-items-center mb-3">
                     <label for="password" class="text-white me-3 w-25">Password</label>
                     <input type="password" name="password" id="password" placeholder="Password" class="w-100 p-2" required>
+                    @if($errors->has('password'))
+                    <div class="text-danger fs-6 fw-light mb-3">{{$errors->first('password')}}</div>
+                    @endif
                 </div>
             </div>
             <div class="mt-6">

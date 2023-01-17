@@ -16,7 +16,8 @@ use Illuminate\Support\Str;
 class MessageController extends Controller
 {
     public function index(Request $request){
-
+        $favorites = Favorite::where('user_id', auth()->user()->id)->get();
+        $like = Dislike::where('user_id', auth()->user()->id)->get();
         $data = null;
         if ($request->has('key')){
             $data = Message::where('content', 'like', '%'.$request->input('key').'%')->paginate(6)->withQueryString();
@@ -25,8 +26,8 @@ class MessageController extends Controller
             $data = Message::paginate(6);
         }
 
-        dd($data);
-        return view('home', compact('data'));
+
+        return view('home', compact('data', 'favorites', 'like'));
     }
 
     public function create_index(){
@@ -68,24 +69,17 @@ class MessageController extends Controller
         $message->content = $content;
         $message->save();
 
-        return redirect('/');
+        return redirect('/profile');
     }
 
     public function delete_message($id){
         $message = Message::destroy($id);
-        return redirect('/');
+        return redirect('/profile');
     }
 
     public function fav_message($id){
         $user = Auth::user()->id;
         $message = $id;
-
-        $exist = Favorite::where('user_id', $user)->where('message_id',$id)->first();
-
-        if($exist){
-            $exist->delete();
-            return redirect('/');
-        }
 
         $fav = new Favorite;
         $fav->user_id = $user;
@@ -106,16 +100,14 @@ class MessageController extends Controller
         return redirect('/');
     }
 
+    public function trending_message(){
+        $count = Favorite::select('message_id', \DB::raw("count(message_id) as count"))->groupBy('message_id')->orderBy('count', 'desc')->get();
+        return view('trending',compact('count'));
+    }
+
     public function dislike_message($id){
         $user = Auth::user()->id;
         $message = $id;
-
-        $exist = Dislike::all()->where('user_id', $user)->where('message_id',$id)->first();
-
-        if($exist){
-            $exist->delete();
-            return redirect('/');
-        }
 
         $dislike = new Dislike;
         $dislike->user_id = $user;
@@ -137,7 +129,7 @@ class MessageController extends Controller
     }
 
     public function my_message() {
-        $user = Auth::user()->id;
+        $user = optional(Auth::user())->id;
         $messages = Message::where("user_id", $user)->get();
 
         return view('profile', compact('messages'));

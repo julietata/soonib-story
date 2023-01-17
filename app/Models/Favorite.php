@@ -18,4 +18,6 @@ class Favorite extends Model
     public function message(){
         return $this->belongsTo(Message::class);
     }
+
+
 }

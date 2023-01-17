@@ -34,6 +34,7 @@ Route::middleware(['guest'])->group(function() {
     Route::get('/logout', [UserController::class, 'logout']);
     Route::post('/fav/{id}', [MessageController::class, 'fav_message']);
     Route::post('/dislike/{id}', [MessageController::class, 'dislike_message']);
+    Route::get('/trending',  [MessageController::class, 'trending_message']);
     Route::get('/createMessage', [MessageController::class, 'create_index']);
     Route::post('/createMessage', [MessageController::class, 'new_message']);
     Route::get('/updateMessage/{id}', [MessageController::class, 'update_message']);

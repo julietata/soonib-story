@@ -20,7 +20,7 @@
                         <p class="fw-semibold fs-2">Message</p>
                         <textarea name="message" id="message" cols="65" rows="3" class="border rounded px-2 py-2 w-100" placeholder="What are you thinking about?"></textarea>
                         <div class="d-flex justify-content-end mt-2">
-                            <button class="bg-danger py-2 px-4 rounded border-0 mt-2 fs-5 fw-semibold me-2" id="cancel">Cancel</button>
+                            <a href="/" class="bg-danger py-2 px-4 rounded border-0 mt-2 fs-5 fw-semibold me-2 text-decoration-none text-black" id="cancel">Cancel</a>
                             <button class="bg-secondary py-2 px-4 rounded border-0 mt-2 fs-5 fw-semibold" id="add">Update</button>
                         </div>
                     </div>

@@ -30,11 +30,20 @@
                         <div class="mb-3">
                             <label for="name" class="text-white me-3">Username</label>
                             <input type="text" name="name" id="name" placeholder="Username" required class="w-100 p-2 rounded">
+                            @if($errors->has('name'))
+                                <div class="text-danger fs-6 fw-light mb-3">{{$errors->first('name')}}</div>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label for="password" class="text-white me-3">Password</label>
                             <input type="password" name="password" id="password" placeholder="Password" required class="w-100 p-2 rounded">
+                            @if($errors->has('password'))
+                                <div class="text-danger fs-6 fw-light mb-3">{{$errors->first('password')}}</div>
+                            @endif
                         </div>
+                        @if(\Illuminate\Support\Facades\Session::has('error'))
+                        <div class="text-danger fs-6 fw-light mb-3">{{\Illuminate\Support\Facades\Session::get('error')}}</div>
+                        @endif
                     </div>
                     <div class="mt-6">
                         <button id="logBtn" class="bg-secondary text-primary fw-bold fs-5 w-100 border-0 py-2 rounded mt-3">Login</button>
