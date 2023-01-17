@@ -24,16 +24,16 @@
 
                 @foreach($detail as $notification)
 
-                    @if($notification['notifDetail']->user->name === 'Admin')
+                    @if($notification['notifDetail']->user->role === 'admin')
                         <div class="bg-secondary rounded fs-5 p-2 ps-3 m-3 d-flex justify-content-between">
                             <div>
                                 <div class="d-flex align-items-center">
                                     <img src="{{asset('storage/assets/Soonib Story.png')}}" class="rounded-circle me-2" style="width: 25px"/>
-                                    <span>
-                                        <strong>Soonib Story</strong>
+                                    <span class="text-white fw-bold">
+                                        Soonib Story
                                     </span>
                                 </div>
-                                <p>
+                                <p class="text-white">
                                     {{$notification['notifDetail']->content}}
                                 </p>
                             </div>
