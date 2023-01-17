@@ -30,6 +30,18 @@ class MessageController extends Controller
         return view('home', compact('data', 'favorites', 'like'));
     }
 
+    public function admin(Request $request){
+
+        $data = null;
+        if ($request->has('key')){
+            $data = Message::where('content', 'like', '%'.$request->input('key').'%')->paginate(6)->withQueryString();
+        }
+        else {
+            $data = Message::paginate(6);
+        }
+        return view('admin', compact('data'));
+    }
+
     public function create_index(){
         return view('createMessage');
     }

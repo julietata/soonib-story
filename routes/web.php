@@ -17,6 +17,7 @@ use App\Http\Controllers\NotificationController;
 */
 
 Route::get('/', [MessageController::class, 'index']);
+Route::get('/admin', [MessageController::class, 'admin']);
 
 //admin
 Route::get('/createNotification', [NotificationController::class, 'createNotificationView']);
