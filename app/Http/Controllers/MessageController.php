@@ -24,6 +24,8 @@ class MessageController extends Controller
         else {
             $data = Message::paginate(6);
         }
+
+        dd($data);
         return view('home', compact('data'));
     }
 
@@ -78,11 +80,12 @@ class MessageController extends Controller
         $user = Auth::user()->id;
         $message = $id;
 
-        // $exist = Favorite::where('user_id', $user)->where('message_id',$id)->get();
+        $exist = Favorite::where('user_id', $user)->where('message_id',$id)->first();
 
-        // if($exist){
-        //     return redirect('/');
-        // }
+        if($exist){
+            $exist->delete();
+            return redirect('/');
+        }
 
         $fav = new Favorite;
         $fav->user_id = $user;
