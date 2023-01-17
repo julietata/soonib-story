@@ -16,8 +16,8 @@ use Illuminate\Support\Str;
 class MessageController extends Controller
 {
     public function index(Request $request){
-        $favorites = Favorite::where('user_id', auth()->user()->id)->get();
-        $like = Dislike::where('user_id', auth()->user()->id)->get();
+        $favorites = null;
+        $like = null;
         $data = null;
         if ($request->has('key')){
             $data = Message::where('content', 'like', '%'.$request->input('key').'%')->paginate(6)->withQueryString();
@@ -25,8 +25,10 @@ class MessageController extends Controller
         else {
             $data = Message::paginate(6);
         }
-
-
+        if(auth()->user()){
+            $favorites = Favorite::where('user_id', auth()->user()->id)->get();
+            $like = Dislike::where('user_id', auth()->user()->id)->get();
+        }
         return view('home', compact('data', 'favorites', 'like'));
     }
 
@@ -55,7 +57,6 @@ class MessageController extends Controller
         //kata-kata kasar
         $badWords = ['kontol','fuck','kimak','memek','ass','asshole', 'bitch','shit'];
         $contentToCheck = strtolower($content);
-//        $badWordCheck = str_contains($contentToCheck,$badWords);
         $badWordCheck = str::contains($contentToCheck,$badWords);
         if($badWordCheck){
             return redirect()->back()->withErrors(['badWord'=>'Bad Word Detected!'])->withInput();

@@ -16,7 +16,7 @@ class AuthUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check()==false && !(auth()->user()->role === "user")){
+        if (auth()->check()==false || auth()->user()->role !== "user"){
             return redirect('/login');
         }
         return $next($request);

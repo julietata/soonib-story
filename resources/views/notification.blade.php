@@ -1,11 +1,17 @@
 @extends('template')
 @section('content')
     <div class="p-5">
-{{--        <p class="text-white fw-bold fs-2 d-flex align-items-center">Notification</p>--}}
-        <div class="d-flex justify-content-between align-items-center flex-row">
-            <p class="text-white fw-bold fs-2 d-flex align-items-center">Notification</p>
-            <a href="/createNotification" class="btn btn-light bg-white py-2 px-4 fs-5 fw-semibold d-flex align-items-center">Create Notification</a>
-        </div>
+
+        @auth
+            @if(auth()->user()->role==='user')
+                <p class="text-white fw-bold fs-2 d-flex align-items-center">Notification</p>
+            @else
+                <div class="d-flex justify-content-between align-items-center flex-row">
+                    <p class="text-white fw-bold fs-2 d-flex align-items-center">Notification</p>
+                    <a href="/createNotification" class="btn btn-light bg-white py-2 px-4 fs-5 fw-semibold d-flex align-items-center">Create Notification</a>
+                </div>
+            @endif
+        @endauth
         <div>
 
             @if(count($detail) < 1)

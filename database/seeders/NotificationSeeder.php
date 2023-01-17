@@ -24,5 +24,10 @@ class NotificationSeeder extends Seeder
                 'user_id' => 2
             ]
         );
+        DB::table('notifications')->insert(
+            [
+                'user_id' => 3
+            ]
+        );
     }
 }
