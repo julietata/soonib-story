@@ -81,6 +81,12 @@ class MessageController extends Controller
         $user = Auth::user()->id;
         $message = $id;
 
+        $exist = Favorite::all()->where('user_id', $user)->where('message_id',$id)->first();
+        if($exist){
+            Favorite::where('user_id', $user)->where('message_id',$id)->delete();
+            return redirect('/');
+        }
+
         $fav = new Favorite;
         $fav->user_id = $user;
         $fav->message_id = $message;
@@ -108,6 +114,12 @@ class MessageController extends Controller
     public function dislike_message($id){
         $user = Auth::user()->id;
         $message = $id;
+
+        $exist = Dislike::all()->where('user_id', $user)->where('message_id',$id)->first();
+        if($exist){
+            Dislike::where('user_id', $user)->where('message_id',$id)->delete();
+            return redirect('/');
+        }
 
         $dislike = new Dislike;
         $dislike->user_id = $user;
