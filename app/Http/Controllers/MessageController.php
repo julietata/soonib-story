@@ -86,6 +86,8 @@ class MessageController extends Controller
     }
 
     public function delete_message($id){
+        Favorite::where('message_id',$id)->delete();
+        Dislike::where('message_id',$id)->delete();
         $message = Message::destroy($id);
         return redirect('/profile');
     }
@@ -121,6 +123,7 @@ class MessageController extends Controller
 
     public function trending_message(){
         $count = Favorite::select('message_id', \DB::raw("count(message_id) as count"))->groupBy('message_id')->orderBy('count', 'desc')->get();
+        // dd($count);
         return view('trending',compact('count'));
     }
 
