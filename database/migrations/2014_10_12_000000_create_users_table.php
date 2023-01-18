@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('gender');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('role')->default('user');
+            $table->string('image')->default('default.png');
             $table->rememberToken();
         });
     }

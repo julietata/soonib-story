@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MessageSeeder::class);
         $this->call(FavoriteSeeder::class);
         $this->call(DislikeSeeder::class);
+        $this->call(NotificationSeeder::class);
     }
 }

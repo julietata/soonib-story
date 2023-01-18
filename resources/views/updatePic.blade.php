@@ -10,19 +10,27 @@
     <title>Soonib Story</title>
 </head>
 <body>
+    <script>
+        function unlock(){
+            document.getElementById('add').removeAttribute("disabled");
+        }
+    </script>
 <div>
     <div class="bg-primary min-vh-100 d-flex justify-content-center align-items-center w-100">
-        <form method="post" class="w-50">
+        <form method="post" enctype="multipart/form-data" class="w-50">
             {{csrf_field()}}
             <div class="w-100">
                 <div class="rounded bg-support shadow px-4 py-3">
                     <div class="rounded-md bg-gray-100 px-6 py-4">
-                        <p class="fw-semibold fs-2">Message</p>
-                        <textarea name="message" id="message" cols="65" rows="3" class="border rounded px-2 py-2 w-100" placeholder="What are you thinking about?"></textarea>
+                        <p class="fw-semibold fs-2">Profile Picture</p>
+                        <input type="file" onchange="unlock()" id="update-image" placeholder="update-image" class="insert-page-input" name="update-image">
                         <div class="d-flex justify-content-end mt-2">
-                            <a href="/" class="bg-danger py-2 px-4 rounded border-0 mt-2 fs-5 fw-semibold me-2 text-decoration-none text-black" id="cancel">Cancel</a>
-                            <button class="bg-secondary py-2 px-4 rounded border-0 mt-2 fs-5 fw-semibold" id="add">Update</button>
+                            <a href="/settings" class="bg-danger py-2 px-4 rounded border-0 mt-2 fs-5 fw-semibold me-2 text-decoration-none text-black" id="cancel">Cancel</a>
+                            <button class="bg-secondary py-2 px-4 rounded border-0 mt-2 fs-5 fw-semibold" id="add" disabled>Update</button>
                         </div>
+                        @if($errors->has('update-image'))
+                        <div class="text-danger fs-6 fw-light mb-3">{{$errors->first('update-image')}}</div>
+                        @endif
                     </div>
                 </div>
             </div>

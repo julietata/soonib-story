@@ -10,6 +10,7 @@
     <title>Soonib Story</title>
 </head>
 <body>
+
     <div class="bg-primary min-vh-100 d-flex justify-content-center align-items-center w-100">
         <form method="post" class="w-50">
             {{csrf_field()}}
@@ -17,7 +18,12 @@
                 <div class="rounded bg-support shadow px-4 py-3">
                     <div class="rounded-md bg-gray-100 px-6 py-4">
                         <p class="fw-semibold fs-2">Message</p>
-                        <textarea name="message" id="message" cols="65" rows="3" class="border rounded px-2 py-2 w-100 mb-2" placeholder="What are you thinking about?"></textarea>
+                        <textarea name="message" id="message" cols="65" rows="3" class="border rounded px-2 py-2 w-100 mb-2 @error('badWord') is-invalid @enderror" placeholder="What are you thinking about?">{{old('message')}}</textarea>
+                        @error('badWord')
+                            <p class="text-danger fw-semibold">
+                                {{$message}}
+                            </p>
+                        @enderror
                         <input type="checkbox" name="anonymous" id="anonymous">
                         <label for="anonymous">Anonymous</label>
                         <div class="d-flex justify-content-end mt-2">

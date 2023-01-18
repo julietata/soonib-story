@@ -3,6 +3,7 @@
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,21 +18,67 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MessageController::class, 'index']);
 
-Route::middleware(['guest'])->group(function() {
+ Route::middleware(['guest'])->group(function() {
     Route::get('/register', [UserController::class, 'register_index']);
     Route::post('/register', [UserController::class, 'register']);
     Route::get('/login', [UserController::class, 'login_index']);
     Route::post('/login', [UserController::class, 'login']);
-});
+ });
 
-Route::middleware(['user'])->group(function() {
+Route::middleware(['auth'])->group(function(){
+
     Route::get('/logout', [UserController::class, 'logout']);
-    Route::post('/fav/{id}', [MessageController::class, 'fav_message']);
-    Route::post('/dislike/{id}', [MessageController::class, 'dislike_message']);
+    Route::get('/trending',  [MessageController::class, 'trending_message']);
     Route::get('/createMessage', [MessageController::class, 'create_index']);
     Route::post('/createMessage', [MessageController::class, 'new_message']);
     Route::get('/updateMessage/{id}', [MessageController::class, 'update_message']);
     Route::post('updateMessage/{id}', [MessageController::class, 'update']);
     Route::post('/delete/{id}', [MessageController::class, 'delete_message']);
     Route::get('/profile', [MessageController::class, 'my_message']);
+    Route::get('/notification',[NotificationController::class, 'index']);
+    Route::get('/settings',[UserController::class, 'settings']);
+
+    Route::middleware(['admin'])->group(function(){
+        Route::get('/createNotification', [NotificationController::class, 'createNotificationView']);
+        Route::post('/createNotification', [NotificationController::class, 'createNotification']);
+        // Route::get('/admin', [MessageController::class, 'admin']);
+    });
+
+    Route::middleware(['user'])->group(function(){
+     Route::post('/fav/{id}', [MessageController::class, 'fav_message']);
+     Route::post('/dislike/{id}', [MessageController::class, 'dislike_message']);
+     Route::get('/updatepic/{id}', [UserController::class, 'update_pic']);
+     Route::post('/updatepic/{id}', [UserController::class, 'updatepic']);
+     Route::get('/updateProfile/{id}', [UserController::class, 'update_profile']);
+     Route::post('/updateProfile/{id}', [UserController::class, 'updateprof']);
+    });
+
+
 });
+// Route::middleware(['user','admin'])->group(function() {
+//    Route::get('/logout', [UserController::class, 'logout']);
+//    Route::post('/fav/{id}', [MessageController::class, 'fav_message']);
+//    Route::post('/dislike/{id}', [MessageController::class, 'dislike_message']);
+//    Route::get('/trending',  [MessageController::class, 'trending_message']);
+//    Route::get('/createMessage', [MessageController::class, 'create_index']);
+//    Route::post('/createMessage', [MessageController::class, 'new_message']);
+//    Route::get('/updateMessage/{id}', [MessageController::class, 'update_message']);
+//    Route::post('updateMessage/{id}', [MessageController::class, 'update']);
+//    Route::post('/delete/{id}', [MessageController::class, 'delete_message']);
+//    Route::get('/profile', [MessageController::class, 'my_message']);
+//    Route::get('/notification',[NotificationController::class, 'index']);
+// });
+
+// Route::middleware(['admin'])->group(function(){
+//     Route::get('/logout', [UserController::class, 'logout']);
+//     Route::post('/fav/{id}', [MessageController::class, 'fav_message']);
+//     Route::post('/dislike/{id}', [MessageController::class, 'dislike_message']);
+//     Route::get('/trending',  [MessageController::class, 'trending_message']);
+//     Route::get('/createMessage', [MessageController::class, 'create_index']);
+//     Route::post('/createMessage', [MessageController::class, 'new_message']);
+//     Route::get('/updateMessage/{id}', [MessageController::class, 'update_message']);
+//     Route::post('updateMessage/{id}', [MessageController::class, 'update']);
+//     Route::post('/delete/{id}', [MessageController::class, 'delete_message']);
+//     Route::get('/profile', [MessageController::class, 'my_message']);
+//     Route::get('/notification',[NotificationController::class, 'index']);
+// });
