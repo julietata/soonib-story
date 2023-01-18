@@ -2,8 +2,7 @@
 @section('content')
 <div class="p-5">
     <div class="d-flex align-items-center mb-4">
-        <img src="storage/assets/{{\Illuminate\Support\Facades\Auth::user()->image}}" width="100" height="100" class="bi bi-person-fill me-3" viewBox="0 0 16 16" alt="">
-
+        <img src="../storage/assets/{{\Illuminate\Support\Facades\Auth::user()->image}}" width="100" height="100" class="bi bi-person-fill me-3" viewBox="0 0 16 16" alt="">
         <div>
             <p class="fw-bold fs-2 ms-2 mb-0 text-white"> {{\Illuminate\Support\Facades\Auth::user()->name}}</p>
             <p class="fw-bold fs-2 ms-2 mb-0 text-white"> {{\Illuminate\Support\Facades\Auth::user()->gender}}</p>
